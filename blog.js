@@ -3,9 +3,9 @@ const mongoose = require('./db'); //this is one of end point that connect in ind
 const blogSchema = new mongoose.Schema({ //describe about project schema
     title: String,
     content: String,
-    Date: Date,
+    date: Date,
 });
 
-const Blog = mongoose.model('blog', blogSchema);
+const Blog = mongoose.model('Blog', blogSchema);
 
 module.exports = Blog;

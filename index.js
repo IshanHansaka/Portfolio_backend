@@ -5,6 +5,7 @@ const port = 5000; //back_end is running on 5000 port and front_end is running o
 
 require('dotenv').config();
 const Project = require('./Project');
+const Blog = require('./blog');
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
