@@ -5,7 +5,9 @@ const port = 5000; //back_end is running on 5000 port and front_end is running o
 require('dotenv').config();
 const Project = require('./Project');
 const Blog = require('./blog');
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());    //libarary to parse json data
 
 app.get('/', (req, res) => {
