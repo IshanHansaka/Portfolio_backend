@@ -1,6 +1,6 @@
-const express = require('express'); //create an express app
+const express = require('express');
 const app = express();
-const port = 5000; //back_end is running on 5000 port and front_end is running on 3000
+const port = 5000;
 
 require('dotenv').config();
 const Project = require('./Project');
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
-app.get('/projects', async (req, res) => {  //read the project
+app.get('/projects', async (req, res) => {
     try {
         const projects = await Project.find();
         res.json(projects);
@@ -23,7 +23,7 @@ app.get('/projects', async (req, res) => {  //read the project
     }
 });
 
-app.post('/projects', async (req, res) => { //write the project
+app.post('/projects', async (req, res) => {
     const project = new Project(req.body);
     try {
         const newProject = await project.save();
@@ -33,7 +33,7 @@ app.post('/projects', async (req, res) => { //write the project
     }
 });
 
-app.patch('/projects/:id', async (req, res) => { //update the project
+app.patch('/projects/:id', async (req, res) => {
     try {
         const project = await Project.findById(req.params.id);
         if (!project) {
@@ -47,7 +47,7 @@ app.patch('/projects/:id', async (req, res) => { //update the project
     }
 });
 
-app.delete('/projects/:id', async (req, res) => { //delete the project
+app.delete('/projects/:id', async (req, res) => {
     try {
         const project = await Project.findById(req.params.id);
         if (!project) {
@@ -60,7 +60,7 @@ app.delete('/projects/:id', async (req, res) => { //delete the project
     }
 });
 
-app.get('/blogs', async (req, res) => { //blogs end point
+app.get('/blogs', async (req, res) => {
     try {
         const blogs = await Blog.find();
         res.json(blogs);
@@ -69,6 +69,43 @@ app.get('/blogs', async (req, res) => { //blogs end point
     }
 });
 
+app.post('/blogs', async (req, res) => {
+    const blog = new Blog(req.body);
+    try {
+        const newBlog = await blog.save();
+        res.status(201).json(newBlog);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+app.patch('/blogs/:id', async (req, res) => {
+    try {
+        const blog = await Blog.findById(req.params.id);
+        if (!blog) {
+            return res.status(404).json({ message: 'Blog not found' });
+        }
+        Object.assign(blog, req.body);
+        const updatedBlog = await blog.save();
+        res.json(updatedBlog);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+app.delete('/blogs/:id', async (req, res) => {
+    try {
+        const blog = await Blog.findById(req.params.id);
+        if (!blog) {
+            return res.status(404).json({ message: 'Blog not found' });
+        }
+        await blog.deleteOne();
+        res.json({ message: 'Blog deleted' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`); //run node app
+    console.log(`Server running at http://localhost:${port}/`);
 });
