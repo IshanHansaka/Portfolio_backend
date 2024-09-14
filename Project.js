@@ -4,7 +4,8 @@ const projectSchema = new mongoose.Schema({ //describe about project schema
     p_id: String,
     name: String,
     description: String,
-    github_link: String
+    github_link: String,
+    tools: [String]
 });
 
 const Project = mongoose.model('Project', projectSchema);
