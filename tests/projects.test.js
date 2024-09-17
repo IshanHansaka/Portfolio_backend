@@ -1,12 +1,14 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
-const app = require('../index.js'); // Import the app object
+const app = require('../index.js');
+
+require('dotenv').config();
 
 /* Connecting to the database before tests. */
 beforeAll(async () => {
   if (mongoose.connection.readyState === 0) {
     try {
-      await mongoose.connect('mongodb://localhost:27017/testdb', { 
+      await mongoose.connect(process.env.DB_URL, { 
         useNewUrlParser: true, 
         useUnifiedTopology: true 
       });
