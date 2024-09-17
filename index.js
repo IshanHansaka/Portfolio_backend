@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+require('dotenv').config();
+
 const Project = require('./Project');
 const Blog = require('./blog');
 const cors = require('cors');
