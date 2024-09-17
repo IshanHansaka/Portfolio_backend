@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.get('/projects', async (req, res) => {
     try {
         const projects = await Project.find();
-        res.json(projects);
+        res.status(200).json(projects);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -41,7 +41,7 @@ app.patch('/projects/:id', async (req, res) => {
         }
         Object.assign(project, req.body);
         const updatedProject = await project.save();
-        res.json(updatedProject);
+        res.status(200).json(updatedProject);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -54,7 +54,7 @@ app.delete('/projects/:id', async (req, res) => {
             return res.status(404).json({ message: 'Project not found' });
         }
         await project.deleteOne();
-        res.json({ message: 'Project deleted' });
+        res.status(200).json({ message: 'Project deleted' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -63,7 +63,7 @@ app.delete('/projects/:id', async (req, res) => {
 app.get('/blogs', async (req, res) => {
     try {
         const blogs = await Blog.find();
-        res.json(blogs);
+        res.status(200).json(blogs);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -87,7 +87,7 @@ app.patch('/blogs/:id', async (req, res) => {
         }
         Object.assign(blog, req.body);
         const updatedBlog = await blog.save();
-        res.json(updatedBlog);
+        res.status(200).json(updatedBlog);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -100,12 +100,10 @@ app.delete('/blogs/:id', async (req, res) => {
             return res.status(404).json({ message: 'Blog not found' });
         }
         await blog.deleteOne();
-        res.json({ message: 'Blog deleted' });
+        res.status(200).json({ message: 'Blog deleted' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`);
-});
+module.exports = app;
