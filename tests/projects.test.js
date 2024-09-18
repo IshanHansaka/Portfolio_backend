@@ -4,14 +4,11 @@ const app = require('../index.js');
 
 require('dotenv').config();
 
-/* Connecting to the database before tests. */
+/* Connecting to the test database before tests. */
 beforeAll(async () => {
   if (mongoose.connection.readyState === 0) {
     try {
-      await mongoose.connect(process.env.DB_URL, { 
-        useNewUrlParser: true, 
-        useUnifiedTopology: true 
-      });
+      await mongoose.connect(process.env.NODE_ENV);
     } catch (error) {
       console.error('Database connection error:', error);
     }

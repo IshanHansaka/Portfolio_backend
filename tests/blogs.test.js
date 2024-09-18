@@ -1,17 +1,14 @@
 const request = require('supertest');
-const app = require('../index');
 const mongoose = require('mongoose');
+const app = require('../index.js');
 
 require('dotenv').config();
 
-/* Connecting to the database before tests. */
+/* Connecting to the test database before tests. */
 beforeAll(async () => {
   if (mongoose.connection.readyState === 0) {
     try {
-      await mongoose.connect(process.env.DB_URL, { 
-        useNewUrlParser: true, 
-        useUnifiedTopology: true 
-      });
+      await mongoose.connect(process.env.NODE_ENV);
     } catch (error) {
       console.error('Database connection error:', error);
     }
@@ -28,7 +25,6 @@ afterAll(async () => {
     console.error('Error closing database connection:', error);
   }
 });
-
 
 describe('/blogs endpoint', () => {
   let blogId;
