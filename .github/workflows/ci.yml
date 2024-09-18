@@ -22,6 +22,7 @@ jobs:
     - run: npm test
       env:
         DB_URL: ${{ secrets.DB_URL }}
+        TEST_DB_URL: ${{ secrets.TEST_DB_URL }}
 
   deploy:
     runs-on: ubuntu-latest
