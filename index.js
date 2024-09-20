@@ -106,4 +106,17 @@ app.delete('/blogs/:id', async (req, res) => {
     }
 });
 
+app.post('/login', (req, res) => {
+    try {
+        const { password } = req.body;
+        if (password === process.env.ADMIN_PSSWD) {
+            res.status(200).json({ message: 'Login successful', success: true });
+        } else {
+            res.status(401).json({ message: 'Login failed', success: false });
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message, success: false });
+    }
+});
+
 module.exports = app;
