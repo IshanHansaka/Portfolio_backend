@@ -23,6 +23,7 @@ jobs:
       env:
         DB_URL: ${{ secrets.DB_URL }}
         TEST_DB_URL: ${{ secrets.TEST_DB_URL }}
+        ADMIN_PSSWD: ${{ secrets.ADMIN_PSSWD }}
 
   deploy:
     runs-on: ubuntu-latest
