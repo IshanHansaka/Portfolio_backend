@@ -19,7 +19,8 @@ describe('POST /contact', () => {
         jest.clearAllMocks();
     });
 
-    test('should call appendToSheet with correct data', async () => {
+    test('should call appendToSheet with correct data, including date', async () => {
+        const currentDate = new Date().toLocaleString();
         appendToSheet.mockResolvedValueOnce({
             updates: { updatedRows: 1 },
         });
@@ -30,6 +31,7 @@ describe('POST /contact', () => {
             .expect(200);
 
         expect(appendToSheet).toHaveBeenCalledWith([
+            currentDate,
             'John',
             'Doe',
             'john.doe@example.com',
