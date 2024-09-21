@@ -123,7 +123,9 @@ app.post('/login', (req, res) => {
 app.post('/contact', async (req, res) => {
     try {
         const { firstName, lastName, email, phoneNumber, message } = req.body;
-        const row = [firstName, lastName, email, phoneNumber, message];
+        const currentDate = new Date().toLocaleString();
+
+        const row = [currentDate, firstName, lastName, email, phoneNumber, message];
         const result = await appendToSheet(row);
 
         if (result) {
