@@ -24,6 +24,8 @@ jobs:
         DB_URL: ${{ secrets.DB_URL }}
         TEST_DB_URL: ${{ secrets.TEST_DB_URL }}
         ADMIN_PSSWD: ${{ secrets.ADMIN_PSSWD }}
+        SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+        GOOGLE_SHEET_CREDENTIALS: ${{ secrets.GOOGLE_SHEET_CREDENTIALS }}
 
   deploy:
     runs-on: ubuntu-latest
