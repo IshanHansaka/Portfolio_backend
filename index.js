@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const { appendToSheet } = require('./googleSheet'); 
 
 require('dotenv').config();
 
@@ -116,6 +117,22 @@ app.post('/login', (req, res) => {
         }
     } catch (err) {
         res.status(500).json({ message: err.message, success: false });
+    }
+});
+
+app.post('/contact', async (req, res) => {
+    try {
+        const { firstName, lastName, email, phoneNumber, message } = req.body;
+        const row = [firstName, lastName, email, phoneNumber, message];
+        const result = await appendToSheet(row);
+
+        if (result) {
+            res.status(200).json({ message: 'Message sent successfully', success: true });
+        } else {
+            res.status(400).json({ message: 'Failed to append data to Google Sheets', success: false });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Internal Server Error', error: err.message });
     }
 });
 
