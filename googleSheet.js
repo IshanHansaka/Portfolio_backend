@@ -15,7 +15,7 @@ const appendToSheet = async (values) => {
     try {
         const response = await sheets.spreadsheets.values.append({
             spreadsheetId: spreadsheetId,
-            range: 'Sheet1!A2:E2',
+            range: 'Sheet1!A2:F2',
             valueInputOption: 'RAW',
             resource: {
                 values: [values],
