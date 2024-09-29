@@ -11,10 +11,7 @@ const Blog = require('./blog');
 const cors = require('cors');
 const { errors } = require('mongodb-memory-server');
 
-const allowedOrigins = ["http://localhost:3000"];
-
-app.use(cors(allowedOrigins));
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());    //libarary to parse json data
 
