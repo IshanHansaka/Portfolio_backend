@@ -8,10 +8,18 @@ require('dotenv').config();
 
 const Project = require('./Project');
 const Blog = require('./blog');
-const cors = require('cors');
 const { errors } = require('mongodb-memory-server');
+const cors = require('cors');
 
-app.use(cors());
+const corsOptions = {
+    origin: ['http://localhost:3000', 'https://ishanhansaka.netlify.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+  };
+  
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(bodyParser.json());
 app.use(express.json());    //libarary to parse json data
 
