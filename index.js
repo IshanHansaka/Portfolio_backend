@@ -1,27 +1,23 @@
 const express = require('express');
 const app = express();
 const { appendToSheet } = require('./googleSheet'); 
-const model = require('./chat');
 const bodyParser = require('body-parser');
-
 require('dotenv').config();
 
 const Project = require('./Project');
 const Blog = require('./blog');
-const { errors } = require('mongodb-memory-server');
+const model = require('./chat');
 const cors = require('cors');
 
 const corsOptions = {
     origin: '*',
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-  };
-  
-app.set('trust proxy', 1);
+};
+
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.use(express.json());
 app.use(bodyParser.json());
-app.use(express.json());    //libarary to parse json data
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
@@ -150,7 +146,7 @@ app.post('/contact', async (req, res) => {
     }
 });
 
-app.post("/chat", async (req, res) => {
+app.post('/chat', async (req, res) => {
     const { message } = req.body;
 
     const context = 
