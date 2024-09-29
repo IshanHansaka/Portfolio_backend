@@ -31,20 +31,18 @@ describe('/blogs endpoint', () => {
 
   it('should fetch all blogs', async () => {
     const res = await request(app).get('/blogs');
-    expect(res.statusCode).toBe(200);    
+    expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
     expect(res.body.length).toBeGreaterThanOrEqual(0);
   });
 
   it('should create a new blog', async () => {
-    const res = await request(app)
-      .post('/blogs')
-      .send({ 
-        title: 'Test Blog', 
-        content: 'test blog post', 
-        date: new Date(), 
-        medium_link: 'https://medium.com/test' 
-      });
+    const res = await request(app).post('/blogs').send({
+      title: 'Test Blog',
+      content: 'test blog post',
+      date: new Date(),
+      medium_link: 'https://medium.com/test',
+    });
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('_id');
     expect(res.body.title).toBe('Test Blog');
@@ -52,14 +50,12 @@ describe('/blogs endpoint', () => {
   });
 
   it('should update an existing blog', async () => {
-    const res = await request(app)
-      .patch(`/blogs/${blogId}`)
-      .send({ 
-        title: 'Updated Test Blog', 
-        content: 'updated test blog post', 
-        date: new Date(), 
-        medium_link: 'https://medium.com/updatetest' 
-      });
+    const res = await request(app).patch(`/blogs/${blogId}`).send({
+      title: 'Updated Test Blog',
+      content: 'updated test blog post',
+      date: new Date(),
+      medium_link: 'https://medium.com/updatetest',
+    });
     expect(res.statusCode).toBe(200);
     expect(res.body.title).toBe('Updated Test Blog');
     expect(res.body.content).toBe('updated test blog post');

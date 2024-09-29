@@ -39,11 +39,11 @@ describe('/projects endpoint', () => {
   it('should create a new project', async () => {
     const res = await request(app)
       .post('/projects')
-      .send({ 
-        name: 'Test Project', 
-        description: 'A test project', 
-        github_link: 'https://github.com/test', 
-        tools: ['Node.js', 'MongoDB'] 
+      .send({
+        name: 'Test Project',
+        description: 'A test project',
+        github_link: 'https://github.com/test',
+        tools: ['Node.js', 'MongoDB'],
       });
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('_id');
@@ -54,14 +54,14 @@ describe('/projects endpoint', () => {
   it('should update an existing project', async () => {
     const res = await request(app)
       .patch(`/projects/${projectId}`)
-      .send({ 
-        name: 'Updated Test Project', 
-        description: 'updated test project', 
-        github_link: 'https://github.com/updatetest', 
-        tools: ['Node.js', 'MongoDB'] 
+      .send({
+        name: 'Updated Test Project',
+        description: 'updated test project',
+        github_link: 'https://github.com/updatetest',
+        tools: ['Node.js', 'MongoDB'],
       });
     expect(res.statusCode).toBe(200);
-    expect(res.body.name).toBe('Updated Test Project'); 
+    expect(res.body.name).toBe('Updated Test Project');
     expect(res.body.description).toBe('updated test project');
     expect(res.body.github_link).toBe('https://github.com/updatetest');
   });
