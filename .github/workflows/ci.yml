@@ -26,8 +26,7 @@ jobs:
         ADMIN_PSSWD: ${{ secrets.ADMIN_PSSWD }}
         SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
         GOOGLE_SHEET_CREDENTIALS: ${{ secrets.GOOGLE_SHEET_CREDENTIALS }}
-        GEMINI_API_KEY: ${{secrets.GEMINI_API_KEY }}
-
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
   deploy:
     runs-on: ubuntu-latest
     needs: build
