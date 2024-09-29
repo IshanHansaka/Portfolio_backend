@@ -11,8 +11,25 @@ const Blog = require('./blog');
 const cors = require('cors');
 const { errors } = require('mongodb-memory-server');
 
+const allowedOrigins = [
+    'https://ishanhansaka.netlify.app',
+    'http://localhost:3000'
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    credentials: true,
+}));
+
 app.use(bodyParser.json());
-app.use(cors());
 app.use(express.json());    //libarary to parse json data
 
 app.get('/', (req, res) => {
