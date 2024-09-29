@@ -12,10 +12,9 @@ const { errors } = require('mongodb-memory-server');
 const cors = require('cors');
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://ishanhansaka.netlify.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
   };
   
 app.use(cors(corsOptions));
