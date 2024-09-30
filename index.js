@@ -162,7 +162,7 @@ app.post('/chat', async (req, res) => {
   const { message } = req.body;
   const context = await fsPromises.readFile('./chat/context.txt', 'utf-8');
 
-  const prompt = `You are a knowledgeable and helpful AI chatbot designed to answer questions about Ishan Hansaka Silva. Here's some information about him: ${context}. User says: "${message}". What would you respond?`;
+  const prompt = `You are a knowledgeable and helpful AI chatbot designed to answer questions about Ishan Hansaka, an undergraduate from the University of Moratuwa, Faculty of IT. You specialize in providing clear, accurate, and informative answers based on the following details: ${context}. With this information, answer the following question in a friendly,accurate manner and concise summary rather than a detailed introduction: "${message}".`;
 
   try {
     const result = await model.generateContent(prompt);
