@@ -13,7 +13,7 @@ const model = require('./chat');
 const cors = require('cors');
 
 const corsOptions = {
-  origin: '*',
+  origin: ['http://localhost:3000', 'https://ishanhansaka.netlify.app/'],
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
@@ -144,12 +144,10 @@ app.post('/contact', async (req, res) => {
         .status(200)
         .json({ message: 'Message sent successfully', success: true });
     } else {
-      res
-        .status(400)
-        .json({
-          message: 'Failed to append data to Google Sheets',
-          success: false,
-        });
+      res.status(400).json({
+        message: 'Failed to append data to Google Sheets',
+        success: false,
+      });
     }
   } catch (err) {
     res
