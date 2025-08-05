@@ -2,8 +2,9 @@ const mongoose = require('./db'); //this is one of end point that connect in ind
 
 const projectSchema = new mongoose.Schema({
   //describe about project schema
-  p_id: String,
   name: String,
+  imageURL: String,
+  live_link: String,
   description: String,
   github_link: String,
   tools: [String],
